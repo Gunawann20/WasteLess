@@ -9,6 +9,7 @@ Hunger and food waste are two highly important and interrelated issues. On one h
 
 ## Capstone Project Team
 | Name     | Bangkit ID | Github profile |
+|--------- |------------|----------------|
 | Gunawan      | A286DSX1403       | https://github.com/Gunawann20 |
 | Yusup Ibrahim Nursidiq | M344DSX4865         |                   |
 | Chika Humaira Abidatillah     |     M140DSY3495    |             |
