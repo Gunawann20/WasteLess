@@ -1,12 +1,16 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
+const foodRoutes = require('./routes/foodRoutes');
 
-//middleware untuk parsing body dari request
-app.use
+const app = express();
+const port = 3000;
+
+// Middleware untuk parsing body request dalam format JSON
+app.use(express.json());
+
+// Menggunakan foodRoutes sebagai middleware untuk rute "/api"
+app.use('/api', foodRoutes);
 
 // Menjalankan server
-const port = 3000;
 app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`);
+  console.log(`Server berjalan di http://localhost:${port}`);
 });
