@@ -14,5 +14,5 @@ Hunger and food waste are two highly important and interrelated issues. On one h
 | Yusup Ibrahim Nursidiq | M344DSX4865         |                   |
 | Chika Humaira Abidatillah     |     M140DSY3495    |             |
 | M. Abul Kalam Iqbal | M281DSX3612  |                             |
-| Galang Rambu Ramadhan | C043DSX3460 |   https://github.com/GWolfNeoX                         |
-| I Komang Tri Cahya Bramantara   | C314DKX4632 |                  |
+| Galang Rambu Ramadhan | C043DSX3460 | https://github.com/GWolfNeoX |
+| I Komang Tri Cahya Bramantara   | C314DKX4632 | https://github.com/cahya03 |
