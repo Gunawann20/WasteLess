@@ -1,9 +1,14 @@
 const express = require('express');
+const router = express.Router();
 const foodController = require('../controllers/foodController');
 
-const router = express.Router();
+// Endpoint /food
+router.get('/food', foodController.getAllFood);
 
-// Route untuk mendapatkan daftar makanan yang tersedia
-router.get('/foods/available', foodController.getAvailableFoodList);
+// Endpoint /food/:id
+router.get('/food/:id', foodController.getFoodById);
+
+// Endpoint /food (POST)
+router.post('/food', foodController.createFood);
 
 module.exports = router;

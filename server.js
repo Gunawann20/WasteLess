@@ -1,16 +1,35 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const sequelize = require('./database/connection');
+const authRoutes = require('./routes/authRoutes');
 const foodRoutes = require('./routes/foodRoutes');
 
 const app = express();
-const port = 3000;
 
-// Middleware untuk parsing body request dalam format JSON
-app.use(express.json());
+// Middleware
+app.use(bodyParser.json());
 
-// Menggunakan foodRoutes sebagai middleware untuk rute "/api"
-app.use('/api', foodRoutes);
+// Routes
+app.use(authRoutes);
+app.use(foodRoutes);
 
-// Menjalankan server
-app.listen(port, () => {
-  console.log(`Server berjalan di http://localhost:${port}`);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal Server Error' });
+});
+
+// Database connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((error) => {
+    console.error('Unable to connect to the database:', error);
+  });
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
