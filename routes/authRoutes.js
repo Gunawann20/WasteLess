@@ -1,11 +1,22 @@
 const express = require('express');
-const router = express.Router();
+const { check } = require('express-validator');
 const authController = require('../controllers/authController');
 
-// Endpoint /login
-router.post('/login', authController.login);
+const router = express.Router();
 
-// Endpoint /register
-router.post('/register', authController.register);
+router.post('/register', [
+  check('name').notEmpty(),
+  check('gender').notEmpty(),
+  check('address').notEmpty(),
+  check('email').isEmail(),
+  check('password').isLength({ min: 6 }),
+], authController.register);
+
+router.post('/login', [
+  check('email').isEmail(),
+  check('password').notEmpty(),
+], authController.login);
+
+router.post('/logout', authController.logout);
 
 module.exports = router;

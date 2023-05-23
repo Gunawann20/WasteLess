@@ -1,18 +1,39 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database/connection');
+const Sequelize = require('sequelize');
+const sequelize = require('../config/database');
 
-const Food = sequelize.define('Food', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
+const User = sequelize.define('user', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
   },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: true
-  }
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  gender: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 }, {
-  tableName: 'foods',
-  timestamps: false
+  timestamps: false, // Menghilangkan kolom createdAt dan updatedAt
 });
 
-module.exports = Food;
+module.exports = User;

@@ -1,35 +1,43 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./database/connection');
+const session = require('express-session');
+const flash = require('connect-flash');
+const dotenv = require('dotenv');
+const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-const foodRoutes = require('./routes/foodRoutes');
+const homeRoutes = require('./routes/homeRoutes');
+
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 1 hari dalam milidetik
+  },
+}));
+app.use(flash());
 
-// Routes
-app.use(authRoutes);
-app.use(foodRoutes);
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Internal Server Error' });
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
 });
 
-// Database connection
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connected to the database');
-  })
-  .catch((error) => {
-    console.error('Unable to connect to the database:', error);
-  });
+app.use('/api', authRoutes);
+app.use('/api/home', homeRoutes);
 
-// Start the server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Terjadi kesalahan server' });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port http://localhost:${port}`);
 });
