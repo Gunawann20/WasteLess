@@ -31,7 +31,6 @@ fun TextField(
         maxLines = 1,
         modifier = modifier.fillMaxWidth(),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = MaterialTheme.colors.secondary,
             focusedBorderColor = MaterialTheme.colors.secondary,
             unfocusedBorderColor = MaterialTheme.colors.secondary
         ),
